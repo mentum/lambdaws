@@ -1,5 +1,5 @@
 {
-  "name": "lambaws",
+  "name": "lambdaws",
   "version": "1.0.0",
   "description": "AWS lambda functions made easy",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EFF/lambaws.git"
+    "url": "https://github.com/EFF/lambdaws.git"
   },
   "keywords": [
     "AWS",
@@ -19,7 +19,7 @@
   "author": "",
   "license": "LGPL.v3",
   "bugs": {
-    "url": "https://github.com/EFF/lambaws/issues"
+    "url": "https://github.com/EFF/lambdaws/issues"
   },
-  "homepage": "https://github.com/EFF/lambaws"
+  "homepage": "https://github.com/EFF/lambdaws"
 }
