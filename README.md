@@ -3,7 +3,7 @@
 
 (todo: add Travis CI)
 
-Lambdaws makes it trivial to build highly scalable, high availability applications. Built on top of AWS Lambda.
+Lambdaws makes it trivial to build highly scalable, highly available applications. Built on top of AWS Lambda.
 
 ## Installation
 
@@ -11,7 +11,7 @@ Lambdaws makes it trivial to build highly scalable, high availability applicatio
 
 ## Usage
 
-```λ``` can take an async function returning a promise and deploy it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
+```λ``` can take an async function returning a promise and deploy it to AWS Lambda. If you call cloudedFunction it will run in the cloud.
 
 ```
 var λ = require('lambdaws').create;
@@ -24,7 +24,7 @@ cloudedFunction.then(function(data) { console.log(data); });
 
 ```
 
-```λ``` can take a function accepting a callback and deploy it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
+```λ``` can take a function accepting a callback and deploy it to AWS Lambda. If you call cloudedFunction it will run in the cloud.
 
 ```
 var λ = require('lambdaws').create;
