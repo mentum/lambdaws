@@ -11,10 +11,10 @@ Lambdaws makes it trivial to build highly scalable, high availability applicatio
 
 ## Usage
 
-```lambdaws.fromPromise``` takes an async function returning a promise and deploys it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
+```λ``` can take an async function returning a promise and deploys it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
 
 ```
-var lambdaws = require('lambdaws');
+var λ = require('lambdaws');
 
 var normalAsyncFunction = function() {/* returns promise */};
 
@@ -24,7 +24,7 @@ cloudedFunction.then(function(data) { console.log(data); });
 
 ```
 
-```lambdaws.fromCallback``` takes a function accepting a callback and deploys it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
+```λ``` can take a function accepting a callback and deploys it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
 
 ```
 var λ = require('lambdaws');
