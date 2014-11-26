@@ -1,0 +1,25 @@
+{
+  "name": "lambaws",
+  "version": "1.0.0",
+  "description": "AWS lambda functions made easy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EFF/lambaws.git"
+  },
+  "keywords": [
+    "AWS",
+    "lambda",
+    "dynamic",
+    "apps"
+  ],
+  "author": "",
+  "license": "LGPL.v3",
+  "bugs": {
+    "url": "https://github.com/EFF/lambaws/issues"
+  },
+  "homepage": "https://github.com/EFF/lambaws"
+}
