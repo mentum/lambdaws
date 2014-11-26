@@ -3,7 +3,7 @@
 
 (todo: add Travis CI)
 
-Lambdaws makes it trivial to build highly scalable, highly available applications. Built on top of AWS Lambda.
+Lambdaws makes it trivial to build highly scalable with high availability applications. Built on top of AWS Lambda.
 
 ## Installation
 
