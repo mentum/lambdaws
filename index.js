@@ -1,4 +1,5 @@
-function lambdaws(){
-}
+var lambdaws = require('./lambdaws.js');
 
-module.exports = lambdaws
+lambdaws.config({
+    /* ... */
+});
