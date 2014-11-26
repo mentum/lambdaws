@@ -18,7 +18,7 @@ var lambdaws = require('lambdaws');
 
 var normalAsyncFunction = function() {/* returns promise */};
 
-var cloudedFunction = lambdaws.fromPromise(normalAsyncFunction);
+var cloudedFunction = λ(normalAsyncFunction);
 
 cloudedFunction.then(function(data) { console.log(data); });
 
@@ -27,11 +27,11 @@ cloudedFunction.then(function(data) { console.log(data); });
 ```lambdaws.fromCallback``` takes a function accepting a callback and deploys it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
 
 ```
-var lambdaws = require('lambdaws');
+var λ = require('lambdaws');
 
 var normalFunction = function(args, callback) {...};
 
-var cloudedFunction = lambdaws.fromCallback(normalFunction);
+var cloudedFunction = λ(normalFunction);
 
 cloudedFunction(args, function(data) {
 	console.log(data);
@@ -42,7 +42,7 @@ cloudedFunction(args, function(data) {
 ### Overriding default settings
 
 ```
-lambdaws.fromCallback(yourFunc, {
+λ(yourFunc, {
 	memory: 256, // mb
 	description: 'Description of your function',
 	timeout: 10 // seconds
@@ -52,7 +52,7 @@ lambdaws.fromCallback(yourFunc, {
 ### Setting your AWS credentials
 
 ```
-lambdaws.config({
+λ.config({
 	accessKeyId: '',
 	secretKey: ''
 });
