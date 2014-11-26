@@ -39,3 +39,23 @@ cloudedFunction(args, function(data) {
 
 ```
 
+### Overriding default settings
+
+```
+lambdaws.fromCallback(yourFunc, {
+	memory: 256, // mb
+	description: 'Descrition of your function',
+	timeout: 10 // seconds
+});
+```
+
+### Setting your AWS credentials
+
+```
+lambdaws.config({
+	accessKeyId: '',
+	secretKey: ''
+});
+```
+
+Your AWS user credentials must have access to Lambda, SQS and S3.
