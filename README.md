@@ -11,7 +11,7 @@ Lambdaws makes it trivial to build highly scalable, high availability applicatio
 
 ## Usage
 
-```λ``` can take an async function returning a promise and deploys it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
+```λ``` can take an async function returning a promise and deploy it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
 
 ```
 var λ = require('lambdaws');
@@ -24,7 +24,7 @@ cloudedFunction.then(function(data) { console.log(data); });
 
 ```
 
-```λ``` can take a function accepting a callback and deploys it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
+```λ``` can take a function accepting a callback and deploy it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
 
 ```
 var λ = require('lambdaws');
