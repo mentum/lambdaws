@@ -1,4 +1,5 @@
 # Lambdaws
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/EFF/lambdaws?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 (todo: add Travis CI)
 
@@ -38,3 +39,23 @@ cloudedFunction(args, function(data) {
 
 ```
 
+### Overriding default settings
+
+```
+lambdaws.fromCallback(yourFunc, {
+	memory: 256, // mb
+	description: 'Description of your function',
+	timeout: 10 // seconds
+});
+```
+
+### Setting your AWS credentials
+
+```
+lambdaws.config({
+	accessKeyId: '',
+	secretKey: ''
+});
+```
+
+Your AWS user credentials must have access to Lambda, SQS and S3.
