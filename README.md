@@ -14,7 +14,7 @@ Lambdaws makes it trivial to build highly scalable, high availability applicatio
 ```λ``` can take an async function returning a promise and deploy it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
 
 ```
-var λ = require('lambdaws');
+var λ = require('lambdaws').create;
 
 var normalAsyncFunction = function() {/* returns promise */};
 
@@ -27,7 +27,7 @@ cloudedFunction.then(function(data) { console.log(data); });
 ```λ``` can take a function accepting a callback and deploy it to AWS Lambda. If you call cloudedFunction it will be runned in the cloud.
 
 ```
-var λ = require('lambdaws');
+var λ = require('lambdaws').create;
 
 var normalFunction = function(args, callback) {...};
 
@@ -52,7 +52,9 @@ cloudedFunction(args, function(data) {
 ### Setting your AWS credentials
 
 ```
-λ.config({
+var lambdaws = require('lambdaws');
+
+lambdaws.config({
 	accessKeyId: '',
 	secretKey: ''
 });
