@@ -44,7 +44,7 @@ cloudedFunction(args, function(data) {
 ```
 lambdaws.fromCallback(yourFunc, {
 	memory: 256, // mb
-	description: 'Descrition of your function',
+	description: 'Description of your function',
 	timeout: 10 // seconds
 });
 ```
