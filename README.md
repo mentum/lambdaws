@@ -23,7 +23,6 @@ var normalAsyncFunction = function() {/* returns promise */};
 var cloudedFunction = λ(normalAsyncFunction);
 
 cloudedFunction.then(function(data) { console.log(data); });
-
 ```
 
 ```λ``` can take a function accepting a callback and deploy it to AWS Lambda. If you call cloudedFunction it will run in the cloud.
@@ -38,7 +37,6 @@ var cloudedFunction = λ(normalFunction);
 cloudedFunction(args, function(data) {
 	console.log(data);
 });
-
 ```
 
 ### Overriding default settings
