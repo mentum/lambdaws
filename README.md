@@ -61,3 +61,7 @@ lambdaws.config({
 ```
 
 Your AWS user credentials must have access to Lambda, SQS and S3.
+
+## Limitations
+
+The same [constraints](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) imposed by AWS Lambda apply. Your function should also be stateless and independant of the underlying architecture. Be also aware that any variable that your function uses must be declared by your function. Global and outer scope variables are not uploaded to AWS Lambda.
