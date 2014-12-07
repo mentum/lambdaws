@@ -1,7 +1,7 @@
 ![logo](./logo50x50.png) Lambdaws
 ====================================
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/EFF/lambdaws?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/mentum/lambdaws?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 (todo: add Travis CI)
 
