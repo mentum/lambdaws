@@ -7,18 +7,13 @@ describe("Lambdaization", function() {
 	var dumbAsyncFunction = function(callback) {callback()};
 
 	beforeEach(function() {
-		originalLambdaize = lambda.__get__('_lambdaize');
 		mockedLambdaize = createSpy('mockedLambdaize');
-
-		lambda.__set__({
-			_lambdaize: mockedLambdaize
-		});
+		originalLambdaize = lambda.__get__('_lambdaize');
+		lambda.__set__('_lambdaize', mockedLambdaize);
 	})
 
 	afterEach(function() {
-		lambda.__set__({
-			_lambdaize: originalLambdaize
-		});
+		lambda.__set__('_lambdaize', originalLambdaize);
 	})
 
 	it("Lambdaize when called the first time", function() {
