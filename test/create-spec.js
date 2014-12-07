@@ -19,7 +19,7 @@ describe("Lambdaization", function() {
 	it("Lambdaize when called the first time", function() {
 
 		lambda.create(dumbAsyncFunction);
-		expect(mockedLambdaize).toHaveBeenCalled();
+		expect(mockedLambdaize).toHaveBeenCalledOnce();
 
 	})
 
