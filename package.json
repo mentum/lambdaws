@@ -21,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/EFF/lambdaws/issues"
   },
-  "homepage": "https://github.com/EFF/lambdaws"
+  "homepage": "https://github.com/EFF/lambdaws",
+  "dependencies": {
+    "MD5": "^1.2.1",
+    "aws-sdk": "^2.0.30",
+    "extend": "^2.0.0",
+    "fs": "0.0.2",
+    "q": "^1.1.2",
+    "rx": "^2.3.20"
+  }
 }
