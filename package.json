@@ -1,8 +1,8 @@
 {
   "name": "lambdaws",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AWS lambda functions made easy",
-  "main": "index.js",
+  "main": "lib/main.js",
   "scripts": {
     "test": "./node_modules/.bin/jasmine-node test"
   },
@@ -13,8 +13,7 @@
   "keywords": [
     "AWS",
     "lambda",
-    "dynamic",
-    "apps"
+    "dynamic"
   ],
   "author": "",
   "license": "LGPL.v3",
