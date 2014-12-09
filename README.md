@@ -11,29 +11,17 @@ Lambdaws makes it trivial to build highly scalable with high availability applic
 
 ## Usage
 
-```λ``` can take an async function returning a promise and deploy it to AWS Lambda. If you call cloudedFunction it will run in the cloud.
+```λ``` takes a function accepting a callback and deploy it to AWS Lambda. If you call cloudedFunction it will run in the cloud.
 
 ```js
 var λ = require('lambdaws').create;
 
-var normalAsyncFunction = function() {/* returns promise */};
+var calculator = function(a, b, callback) { callback(a+b) };
 
-var cloudedFunction = λ(normalAsyncFunction);
+var cloudedCalculator = λ(calculator);
 
-cloudedFunction().then(function(data) { console.log(data); });
-```
-
-```λ``` can take a function accepting a callback and deploy it to AWS Lambda. If you call cloudedFunction it will run in the cloud.
-
-```js
-var λ = require('lambdaws').create;
-
-var normalFunction = function(args, callback) {...};
-
-var cloudedFunction = λ(normalFunction);
-
-cloudedFunction(args, function(data) {
-	console.log(data);
+cloudedCalculator(5, 2, function(data) { // Calls the function in the cloud, it doesn't run locally
+	console.log(data); // Prints 7
 });
 ```
 
@@ -53,12 +41,19 @@ cloudedFunction(args, function(data) {
 var lambdaws = require('lambdaws');
 
 lambdaws.config({
-	accessKeyId: '',
-	secretKey: ''
+	accessKey: '', // string, AWS AccessKeyId
+	secretKey: '', // string, AWS AccessKeySecret
+	role: '' // string, AWS ARN. Must have full access to SQS
 });
+
+lambdaws.start();
 ```
 
 Your AWS user credentials must have access to Lambda, SQS and S3.
+
+### Full working example
+
+See ```test/example.js```
 
 ## Limitations
 
