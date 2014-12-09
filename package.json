@@ -4,7 +4,7 @@
   "description": "AWS lambda functions made easy",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/jasmine-node test"
   },
   "repository": {
     "type": "git",
@@ -26,8 +26,11 @@
     "MD5": "^1.2.1",
     "aws-sdk": "^2.0.30",
     "extend": "^2.0.0",
-    "fs": "0.0.2",
     "q": "^1.1.2",
     "rx": "^2.3.20"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5",
+    "rewire": "^2.1.3"
   }
 }
