@@ -2,7 +2,7 @@
   "name": "lambdaws",
   "version": "1.0.1",
   "description": "AWS lambda functions made easy",
-  "main": "lib/main.js",
+  "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/jasmine-node test"
   },
