@@ -16,16 +16,18 @@ var cloudedCalculator = λ(calculator, {
 	name: 'CALCULATOR'
 });
 
-lambdaws.start();
+lambdaws.start(function(data){
+	console.log('quee started');
+});
 
-// var stdin = process.openStdin();
+var stdin = process.openStdin();
 
-// stdin.on('data', function(chunk) {
+stdin.on('data', function(chunk) {
 	
-// 	cloudedCalculator(2, 6, function(data) {
-// 		console.log("<--", data)
-// 	});
+	cloudedCalculator(2, 6, function(data) {
+		console.log("<--", data)
+	});
 
-// });
+});
 
 setTimeout(function() {}, 1000 * 1000); // Keep Alive
