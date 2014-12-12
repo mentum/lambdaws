@@ -1,33 +1,45 @@
 var rewire = require('rewire'),
-	lambda = rewire("../lib/main.js");
+	LambdaHelper = rewire("../lib/LambdaHelper");
 
 describe("Lambdaization", function() {
-	var originalLambdaize, mockedLambdaize,
-		originalUpload, mockedUpload;
+	var originalLambdaize, mockedLambdaize, mockedAWS,
+		originalUpload, mockedUpload, lambdaHelper;
 
 	var dumbAsyncFunction = function(callback) {callback()};
 
 	beforeEach(function() {
+		mockedAWS = createSpyObj('mockedAWS', ['Lambda']);
 		mockedLambdaize = createSpy('mockedLambdaize');
 		mockedUpload = createSpy('mockedUpload');
 
-		originalLambdaize = lambda.__get__('_lambdaize');
-		originalUpload = lambda.__get__('_uploadFunctionAsync');
+		originalLambdaize = LambdaHelper.__get__('_lambdaize');
+		originalUpload = LambdaHelper.__get__('_uploadFunctionAsync');
 
-		lambda.__set__('_lambdaize', mockedLambdaize);
-		lambda.__set__('_uploadFunctionAsync', mockedUpload);
-	})
+		LambdaHelper.__set__('_lambdaize', mockedLambdaize);
+		LambdaHelper.__set__('_uploadFunctionAsync', mockedUpload);
+
+		lambdaHelper = new LambdaHelper(mockedAWS);
+	});
 
 	afterEach(function() {
-		lambda.__set__('_lambdaize', originalLambdaize);
-		lambda.__set__('_uploadFunctionAsync', originalUpload);
+		LambdaHelper.__set__('_lambdaize', originalLambdaize);
+		LambdaHelper.__set__('_uploadFunctionAsync', originalUpload);
 	})
 
-	it("Lambdaize when called the first time", function() {
+	it('should intitialize aws lambda SDK', function(){
+		expect(mockedAWS.Lambda).toHaveBeenCalled();
+	});
 
-		lambda.create(dumbAsyncFunction);
+	it('should Lambdaize when called the first time', function(){
+		lambdaHelper.getCloudedFunction(dumbAsyncFunction);
 		expect(mockedLambdaize).toHaveBeenCalled();
 		expect(mockedUpload).toHaveBeenCalled();
-	})
+	});
 
-})
+	it('should Lambdaize only once on multiple calls', function(){
+		lambdaHelper.getCloudedFunction(dumbAsyncFunction);
+		lambdaHelper.getCloudedFunction(dumbAsyncFunction);
+
+		expect(mockedLambdaize.calls.count()).toEqual(1);
+	});
+});

@@ -2,9 +2,9 @@ var lambdaws = require('../'),
 	λ = lambdaws.create;
 
 lambdaws.config({
-	accessKey: 'AKIAINF2FWKX3LDRTR6Q',
-	secretKey: 'LupbZECzd+qC3Y7GVtWQHoNWgraWTfqOYvTc1NNY',
-	role: 'arn:aws:iam::246175073899:role/lambda_exec_sqs',
+	accessKey: 'YOUR ACCESS KEY',
+	secretKey: 'YOUR SECRET',
+	role: '',
 	region: 'us-east-1'
 });
 
@@ -16,9 +16,7 @@ var cloudedCalculator = λ(calculator, {
 	name: 'CALCULATOR'
 });
 
-lambdaws.start(function(data){
-	console.log('quee started');
-});
+lambdaws.start();
 
 var stdin = process.openStdin();
 
