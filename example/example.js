@@ -1,11 +1,11 @@
-var lambdaws = require('../lib/main.js'),
+var lambdaws = require('../'),
 	λ = lambdaws.create;
 
 lambdaws.config({
-    accessKey: 'YOUR_AWS_ACCESS_KEY',
-    secretKey: 'YOUR_AWS_SECRET_KEY',
-    role: 'LAMBDAWS_ARN_WITH_FULL_ACCESS_TO_SQS',
-    region: 'us-east-1'
+	accessKey: 'YOUR_ACCESS_KEY',
+	secretKey: 'YOUR_SECRET',
+	role: 'LAMBDAWS_ARN_WITH_FULL_ACCESS_TO_SQS', // not necessary if the user has full access
+	region: 'us-east-1'
 });
 
 var calculator = function(a, b, callback) {

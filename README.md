@@ -53,7 +53,7 @@ Your AWS user credentials must have access to Lambda, SQS and S3.
 
 ### Full working example
 
-See ```test/example.js```
+See ```example/example.js```
 
 ## Limitations
 
