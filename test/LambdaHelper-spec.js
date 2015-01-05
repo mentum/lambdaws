@@ -42,6 +42,7 @@ describe("getCloudedFunctionFromModule", function() {
 		LambdaHelper.__set__('_addFolderRecursiveToZipNode', newAddFolderRecursiveToZipNode);
 		LambdaHelper.__set__('_addFileToZipNode', newAddFileToZipNode);
 		LambdaHelper.__set__('_uploadZipAsync', newUploadZipAsync);
+		
 
 		helper = new LambdaHelper(mockedAWS);
 	});
