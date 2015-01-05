@@ -1,13 +1,19 @@
 var rewire = require('rewire'),
-LambdaHelper = rewire("../lib/LambdaHelper");
+	Q = require('q'),
+	LambdaHelper = rewire("../lib/LambdaHelper");
 
 var dumbAsyncFunction = function(callback) {callback()};
 
 describe("getCloudedFunctionFromModule", function() {
 
 	var mockedAWS = createSpyObj('mockedAWS', ['Lambda']);
-	var helper;
-	var newLoadModule, newGetDependencyFolder, newAddFolderRecursiveToZipNode, newAddFileToZipNode;
+	
+	var helper,
+		newLoadModule, 
+		newGetDependencyFolder, 
+		newAddFolderRecursiveToZipNode, 
+		newAddFileToZipNode, 
+		newUploadZipAsync;
 
 	beforeEach(function() {
 		newLoadModule = function(module) {
@@ -26,11 +32,16 @@ describe("getCloudedFunctionFromModule", function() {
 
 		newAddFolderRecursiveToZipNode = function() {};
 		newAddFileToZipNode = function() {};
+		newUploadZipAsync = function() {
+			var d = Q.defer();
+			return d.promise;
+		};
 
 		LambdaHelper.__set__('_loadModule', newLoadModule);
 		LambdaHelper.__set__('_getDependencyFolder', newGetDependencyFolder);
 		LambdaHelper.__set__('_addFolderRecursiveToZipNode', newAddFolderRecursiveToZipNode);
 		LambdaHelper.__set__('_addFileToZipNode', newAddFileToZipNode);
+		LambdaHelper.__set__('_uploadZipAsync', newUploadZipAsync);
 
 		helper = new LambdaHelper(mockedAWS);
 	});
