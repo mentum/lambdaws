@@ -8,13 +8,22 @@ lambdaws.config({
 	region: 'us-east-1'
 });
 
-var calculator = function(a, b, callback) {
-	callback(a + b);
+// Example 1
+// Cloudify inline function
+
+var minus = function(a, b, callback) {
+	callback(a - b);
 };
 
-var cloudedCalculator = λ(calculator, {
-	name: 'CALCULATOR'
+var cloudedMinus = λ(minus, {
+	name: 'MINUS'
 });
+
+// Example 2
+// Cloudify function in module
+
+var cloudedAdd = λ(require.resolve('./calculator'), 'add', ['fs', 'q'], { name: 'ADD' });
+var cloudedDivide = λ(require.resolve('./calculator'), 'divide', ['fs', 'q'], { name: 'DIVIDE' });
 
 lambdaws.start();
 
@@ -22,8 +31,16 @@ var stdin = process.openStdin();
 
 stdin.on('data', function(chunk) {
 	
-	cloudedCalculator(2, 6, function(data) {
-		console.log("<--", data)
+	cloudedMinus(2, 8, function(data) {
+		console.log("Inline (2-8) = ", data)
+	});
+
+	cloudedAdd(2, 8, function(data) {
+		console.log("Module (2+8) = ", data)
+	});
+
+	cloudedDivide(12, 2, function(data) {
+		console.log("Module (12/2) = ", data)
 	});
 
 });
