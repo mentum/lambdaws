@@ -22,9 +22,14 @@ describe("Function arguments", function() {
 		expect(mockedLambdaHelper.getCloudedFunctionFromFunction).toHaveBeenCalledWith(dumbAsyncFunction, { test: 'ok' });
 	});
 
-	it('Can take a module path and a function name and parameters overwrite', function() {
+	it('Can take a module path and a function name and deps and parameters overwrite', function() {
 		lambdaws.create('path/to/module', 'handler', ['rewire'], {test: 'ok'});
 		expect(mockedLambdaHelper.getCloudedFunctionFromModule).toHaveBeenCalledWith('path/to/module', 'handler', ['rewire'], {test: 'ok'});
+	});
+
+	it('Can take only a module path and deps and parameters overwrite', function() {
+		lambdaws.create('path/to/module', ['rewire'], {test: 'ok'});
+		expect(mockedLambdaHelper.getCloudedFunctionFromModule).toHaveBeenCalledWith('path/to/module', null, ['rewire'], {test: 'ok'});
 	});
 });
 
