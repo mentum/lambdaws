@@ -20,18 +20,39 @@ Lambdaws makes it trivial to build highly scalable with high availability applic
 
 ## Usage
 
-```λ``` takes a function accepting a callback and deploy it to AWS Lambda. If you call cloudedFunction it will run in the cloud.
+### Inline functions without dependencies
+
+```λ``` takes an inline asynchronous function and deploy it to AWS Lambda. If you call cloudedCalculator it will run in the cloud.
 
 ```js
 var λ = require('lambdaws').create;
 
-var calculator = function(a, b, callback) { callback(a+b) };
+// A simple inlined asynchronous function computing A + B
+var calculator = function(a, b, callback) { 
+	callback(a + b);
+};
 
+// This will automatically instrument and upload your function to AWS Lambda
 var cloudedCalculator = λ(calculator);
 
-cloudedCalculator(5, 2, function(data) { // Calls the function in the cloud, it doesn't run locally
+// cloudedCalculator is a reference to the function in the cloud.
+// Therefore calling this function will invoke it on AWS Lambda rather than locally.
+cloudedCalculator(5, 2, function(data) {
+	// Automatic instrumentation of the code added a SQS message push of the result
+	// the result of the function is then available in real time without polling CloudWatch
 	console.log(data); // Prints 7
 });
+```
+
+### Functions inside modules with external dependencies
+
+```js
+var cloudedCalculator = λ(
+	require.resolve('./my_module'), // Absolute path to module
+	'functionNameInsideModule', // The name of the function in the module. Optional if module returns a function.
+	['async', 'request'], // External dependencies. Must reside in node_modules for now.
+	{ description : 'my custom description' } // Settings override
+);
 ```
 
 ### Overriding default settings
