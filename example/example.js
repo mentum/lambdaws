@@ -2,9 +2,9 @@ var lambdaws = require('../'),
 	λ = lambdaws.create;
 
 lambdaws.config({
-	accessKey: 'AKIAIHRVTAA4WHVXY3UQ',
-	secretKey: 's2NDKnfInB+OTnDkyYHOVjztIwxmzLP/gaHW3Nvi',
-	role: 'arn:aws:iam::010371688755:role/lambdaws', // not necessary if the user has full access
+	accessKey: 'YOUR_ACCESS_KEY',
+	secretKey: 'YOUR_SECRET',
+	role: 'LAMBDAWS_ARN_WITH_FULL_ACCESS_TO_SQS', // not necessary if the user has full access
 	region: 'us-east-1'
 });
 
