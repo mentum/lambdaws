@@ -2,9 +2,9 @@ var lambdaws = require('../'),
 	λ = lambdaws.create;
 
 lambdaws.config({
-	accessKey: 'YOUR_ACCESS_KEY',
-	secretKey: 'YOUR_SECRET',
-	role: 'LAMBDAWS_ARN_WITH_FULL_ACCESS_TO_SQS', // not necessary if the user has full access
+	accessKey: 'AKIAIHRVTAA4WHVXY3UQ',
+	secretKey: 's2NDKnfInB+OTnDkyYHOVjztIwxmzLP/gaHW3Nvi',
+	role: 'arn:aws:iam::010371688755:role/lambdaws', // not necessary if the user has full access
 	region: 'us-east-1'
 });
 
@@ -12,10 +12,11 @@ lambdaws.config({
 // Cloudify inline function
 
 var minus = function(a, b, callback) {
+	require('q');
 	callback(a - b);
 };
 
-var cloudedMinus = λ(minus, {
+var cloudedMinus = λ(minus, ['fs', 'q'], {
 	name: 'MINUS'
 });
 
