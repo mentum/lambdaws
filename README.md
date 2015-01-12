@@ -18,7 +18,7 @@ Lambdaws will automatically:
 
 Lambdaws will __not__:
 - Alter your function or module
-- Re-upload the function on every calls
+- Re-upload the function on every call
 - Add much overhead
 
 ## Installation
