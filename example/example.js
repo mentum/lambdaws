@@ -12,10 +12,11 @@ lambdaws.config({
 // Cloudify inline function
 
 var minus = function(a, b, callback) {
+	require('q');
 	callback(a - b);
 };
 
-var cloudedMinus = λ(minus, {
+var cloudedMinus = λ(minus, ['fs', 'q'], {
 	name: 'MINUS'
 });
 

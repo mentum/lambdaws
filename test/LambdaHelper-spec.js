@@ -5,14 +5,11 @@ var rewire = require('rewire'),
 var dumbAsyncFunction = function(callback) {callback()};
 
 describe("getCloudedFunctionFromModule", function() {
-
-	var mockedAWS = createSpyObj('mockedAWS', ['Lambda']);
+	var mockedAWS 		= createSpyObj('mockedAWS', ['Lambda']),
+		mockedZipper 	= createSpyObj('zipper', ['zipFunction', 'zipModule']);
 	
 	var helper,
 		newLoadModule, 
-		newGetDependencyFolder, 
-		newAddFolderRecursiveToZipNode, 
-		newAddFileToZipNode, 
 		newUploadZipAsync;
 
 	beforeEach(function() {
@@ -26,21 +23,13 @@ describe("getCloudedFunctionFromModule", function() {
 			return function(){};
 		};
 
-		newGetDependencyFolder = function(dep) {
-			return dep;
-		};
-
-		newAddFolderRecursiveToZipNode = function() {};
-		newAddFileToZipNode = function() {};
 		newUploadZipAsync = function() {
 			var d = Q.defer();
 			return d.promise;
 		};
 
+		LambdaHelper.__set__('zipper', mockedZipper);
 		LambdaHelper.__set__('_loadModule', newLoadModule);
-		LambdaHelper.__set__('_getDependencyFolder', newGetDependencyFolder);
-		LambdaHelper.__set__('_addFolderRecursiveToZipNode', newAddFolderRecursiveToZipNode);
-		LambdaHelper.__set__('_addFileToZipNode', newAddFileToZipNode);
 		LambdaHelper.__set__('_uploadZipAsync', newUploadZipAsync);
 		
 
@@ -48,16 +37,16 @@ describe("getCloudedFunctionFromModule", function() {
 	});
 
 	describe('Cache', function() {
-		it('Cached when called with same args', function() {
+		it('Cached when called with same args for module', function() {
 			var call1 = helper.getCloudedFunctionFromModule('path/to/module', 'handler', ['rewire'], {test: 'ok'});
 			var call2 = helper.getCloudedFunctionFromModule('path/to/module', 'handler', ['rewire'], {test: 'ok'});
 
 			expect(call1).not.toBe(null);
 			expect(call1).not.toBe(undefined);
-			expect(call1 === call2).toBe(true);
+			expect(call1).toEqual(call2);
 		});
 
-		it('Cache takes all arguments into account', function() {
+		it('Cache takes all arguments into account for module', function() {
 			var call1 = helper.getCloudedFunctionFromModule('path/to/module', 'handler', ['rewire'], {test: 'ok'});
 			var call2 = helper.getCloudedFunctionFromModule('path/to/module/difference', null, ['rewire'], {test: 'ok'});
 			var call3 = helper.getCloudedFunctionFromModule('path/to/module', 'difference', ['rewire'], {test: 'ok'});
@@ -109,5 +98,96 @@ describe("getCloudedFunctionFromModule", function() {
 			expect(f).not.toThrow();
 		});
 	});
+});
 
+describe("Lambdaization", function() {
+	var dumbAsyncFunction = function(callback) {callback()};
+	
+	var originalLambdaizeModule,
+		mockedLambdaizeModule,
+		originalLoadModule,
+		originalLambdaize,
+		mockedLoadModule,
+		mockedLambdaize,
+		originalZipper,
+		originalUpload,
+		mockedUpload,
+		mockedZipper,
+		lambdaHelper,
+		mockedAWS;
+
+	beforeEach(function() {
+		mockedLambdaizeModule 	= createSpy('mockedLambdaizeModule');
+		mockedLoadModule 		= createSpy('mockedLoadModule');
+		mockedLambdaize 		= createSpy('mockedLambdaize');
+		mockedUpload 			= createSpy('mockedUpload');
+		mockedZipper 			= createSpyObj('mockedZipper', ['zipFunction', 'zipModule']);
+		mockedAWS 				= createSpyObj('mockedAWS', ['Lambda']);
+
+		originalLambdaizeModule	= LambdaHelper.__get__('_lambdaizeModule');
+		originalLoadModule		= LambdaHelper.__get__('_loadModule');
+		originalLambdaize 		= LambdaHelper.__get__('_lambdaize');
+		originalUpload 			= LambdaHelper.__get__('_uploadZipAsync');
+		originalZipper			= LambdaHelper.__get__('zipper');
+
+		LambdaHelper.__set__('_lambdaizeModule', mockedLambdaizeModule);
+		LambdaHelper.__set__('_loadModule', mockedLoadModule);
+		LambdaHelper.__set__('_uploadZipAsync', mockedUpload);
+		LambdaHelper.__set__('_lambdaize', mockedLambdaize);
+		LambdaHelper.__set__('zipper', mockedZipper);
+		
+		lambdaHelper = new LambdaHelper(mockedAWS);
+	});
+
+	afterEach(function() {
+		LambdaHelper.__set__('_lambdaizeModule', originalLambdaizeModule);
+		LambdaHelper.__set__('_loadModule', originalLoadModule);
+		LambdaHelper.__set__('_uploadZipAsync', originalUpload);
+		LambdaHelper.__set__('_lambdaize', originalLambdaize);
+		LambdaHelper.__set__('zipper', originalZipper);
+	})
+
+	it('should intitialize aws lambda SDK', function(){
+		expect(mockedAWS.Lambda).toHaveBeenCalled();
+	});
+
+	it('should Lambdaize function when called the first time', function(){
+		lambdaHelper.getCloudedFunctionFromFunction(dumbAsyncFunction, [], {});
+		
+		expect(mockedZipper.zipFunction).toHaveBeenCalled();
+		expect(mockedLambdaize).toHaveBeenCalled();
+		expect(mockedUpload).toHaveBeenCalled();
+	});
+
+	it('should Lambdaize function only once on multiple calls', function(){
+		lambdaHelper.getCloudedFunctionFromFunction(dumbAsyncFunction, [], {});
+		lambdaHelper.getCloudedFunctionFromFunction(dumbAsyncFunction, [], {});
+
+		expect(mockedLambdaize.calls.count()).toEqual(1);
+	});
+	
+	describe('module', function(){
+		var handlerName = 'handler';
+		
+		beforeEach(function(){
+			var fakeModule = {}
+			fakeModule[handlerName] = dumbAsyncFunction;
+			mockedLoadModule.and.returnValue(fakeModule);
+		})
+
+		it('should Lambdaize module when called the first time', function(){
+			lambdaHelper.getCloudedFunctionFromModule('/module/path', handlerName, ['dep'], {});
+			
+			expect(mockedZipper.zipModule).toHaveBeenCalled();
+			expect(mockedLambdaizeModule).toHaveBeenCalled();
+			expect(mockedUpload).toHaveBeenCalled();
+		});
+		
+		it('should Lambdaize module when called the first time', function(){
+			lambdaHelper.getCloudedFunctionFromModule('/module/path', handlerName, ['dep'], {});
+			lambdaHelper.getCloudedFunctionFromModule('/module/path', handlerName, ['dep'], {});
+			
+			expect(mockedLambdaizeModule.calls.count()).toEqual(1);
+		});
+	});
 });
