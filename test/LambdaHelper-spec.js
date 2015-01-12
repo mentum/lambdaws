@@ -118,10 +118,10 @@ describe("Lambdaization", function() {
 
 	beforeEach(function() {
 		mockedLambdaizeModule 	= createSpy('mockedLambdaizeModule');
-		mockedLoadModule		= createSpy('mockedLoadModule');
+		mockedLoadModule 		= createSpy('mockedLoadModule');
 		mockedLambdaize 		= createSpy('mockedLambdaize');
 		mockedUpload 			= createSpy('mockedUpload');
-		mockedZipper			= createSpyObj('mockedZipper', ['zipFunction', 'zipModule']);
+		mockedZipper 			= createSpyObj('mockedZipper', ['zipFunction', 'zipModule']);
 		mockedAWS 				= createSpyObj('mockedAWS', ['Lambda']);
 
 		originalLambdaizeModule	= LambdaHelper.__get__('_lambdaizeModule');
