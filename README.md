@@ -96,3 +96,12 @@ See ```example/example.js```
 ## Limitations
 
 The same [constraints](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) imposed by AWS Lambda apply. Your function should also be stateless and independant of the underlying architecture. Be also aware that any variable that your function uses must be declared by your function. Global and outer scope variables are not uploaded to AWS Lambda.
+
+## Roadmap
+
+[Public Trello Board](https://trello.com/b/V8OrXkFa/lambda)
+
+## Contributions
+
+Contributions are welcomed! Please visit the Trello Board to vote and see which cards are the most in demand.
+When you decide to tackle a card, please move it to the according list, assign it to yourself, then make a pull request.
