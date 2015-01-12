@@ -1,3 +1,4 @@
+
 var lambdaws = require('../'),
 	λ = lambdaws.create;
 
@@ -22,8 +23,8 @@ var cloudedMinus = λ(minus, {
 // Example 2
 // Cloudify function in module
 
-var cloudedAdd = λ(require.resolve('./calculator'), 'add', ['fs', 'q'], { name: 'ADD' });
-var cloudedDivide = λ(require.resolve('./calculator'), 'divide', ['fs', 'q'], { name: 'DIVIDE' });
+var cloudedAdd = λ('./calculator', 'add', ['fs', 'q'], { name: 'ADD' });
+var cloudedDivide = λ('./calculator', 'divide', ['fs', 'q'], { name: 'DIVIDE' });
 
 lambdaws.start();
 
