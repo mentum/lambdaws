@@ -4,7 +4,7 @@
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/mentum/lambdaws?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://img.shields.io/travis/mentum/lambdaws.svg?style=flat)](https://travis-ci.org/mentum/lambdaws)
 [![Npm Version](http://img.shields.io/npm/v/lambda-job.svg?style=flat)](http://browsenpm.org/package/lambdaws)
 
-Using Amazon's Lambda Service, Lambdaws cloudifies any javascript function — including existing libraries — with no extra code. The goal of Lambdaws is to make it trivial to build highly scalable with high availability applications.
+Using Amazon's Lambda Service, Lambdaws cloudifies any javascript function — including existing libraries — with no extra code. It removes the friction you get when using AWS Lambda directly. The goal of Lambdaws is to make it trivial to build highly scalable with high availability applications.
 
 ## Features
 
