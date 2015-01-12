@@ -48,7 +48,7 @@ cloudedCalculator(5, 2, function(data) {
 
 ```js
 var cloudedCalculator = λ(
-	require.resolve('./my_module'), // Absolute path to module
+	'./my_module', // Relative path to module
 	'functionNameInsideModule', // The name of the function in the module. Optional if module returns a function.
 	['async', 'request'], // External dependencies. Must reside in node_modules for now.
 	{ description : 'my custom description' } // Settings override
