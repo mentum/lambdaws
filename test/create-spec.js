@@ -10,6 +10,7 @@ describe("Function arguments", function() {
 	beforeEach(function() {
 		mockedLambdaHelper = createSpyObj('mockedLambdaHelper', ['getCloudedFunctionFromFunction', 'getCloudedFunctionFromModule']),
 		originalLambdaHelper = lambdaws.__get__('_lambdaHelper');
+		lambdaws.__set__('_resolvePathFromParent', function(p) { return p; })
 		lambdaws.__set__('_lambdaHelper', mockedLambdaHelper);
 	});
 
