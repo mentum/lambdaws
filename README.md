@@ -3,16 +3,23 @@
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/mentum/lambdaws?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://img.shields.io/travis/mentum/lambdaws.svg?style=flat)](https://travis-ci.org/mentum/lambdaws)
 
-Lambdaws makes it trivial to build highly scalable with high availability applications. Built on top of AWS Lambda. The goal of Lambdaws is to remove friction when using Lambda and make it easy to cloudify any function.
+Using Amazon's Lambda Service, Lambdaws cloudifies any javascript function — including existing libraries — with no extra code. The goal of Lambdaws is to make it trivial to build highly scalable with high availability applications.
 
 ## Features
 
-- Automatic function zipping and uploading to AWS Lambda
-- Supports external dependencies
-- Real-time function results using SQS long polling
-- Automatic instrumentation of your module prior uploading to Lambda
-- Doesn't require any code change to your library / module
-- Change detection in your code and automatic re-upload at first run
+Lambdaws will automatically:
+- Create a new SQS Queue for your function
+- Instrument your function/module to store the result on that SQS Queue
+- Zip your function/module
+- Include any depenencies needed from your module in the zip file
+- Upload the zip file to AWS Lambda
+- Instantly provide your application with the execution result as soon as it is available (by using SQS long-polling)
+- Detect any change to your library and re-upload it if needed
+
+Lambdaws will __not__:
+- Alter your function or module
+- Re-upload the function on every calls
+- Add much overhead
 
 ## Installation
 
