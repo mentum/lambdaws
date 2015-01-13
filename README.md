@@ -102,6 +102,5 @@ The same [constraints](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) 
 [Public Trello Board](https://trello.com/b/V8OrXkFa/lambda)
 
 ## Contributions
-
-Contributions are welcomed! Please visit the Trello Board to vote and see which cards are the most in-demand.
-When you decide to tackle a card, please move it to the according list, assign it to yourself, and make a pull request.
+This repo is in early stage so don't be shy and report bugs if you find some.
+Contributions are more than welcomed! Please visit the Trello Board to vote and see which cards are the most in-demand. When you decide to tackle a card, please move it to the according list, assign it to yourself, and make a pull request.
