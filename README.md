@@ -75,17 +75,38 @@ var cloudedCalculator = λ(
 
 ### Setting your AWS credentials
 
-```js
-var lambdaws = require('lambdaws');
+You can set your AWS credentials in one of three ways.
 
-lambdaws.config({
-	accessKey: '', // string, AWS AccessKeyId
-	secretKey: '', // string, AWS AccessKeySecret
-	role: '' // string, AWS ARN. Must have full access to SQS
-});
+1. By default, the AWS SDK looks for credentials in `~/.aws/credentials`. If you do not set anything, lambdaws will use the default profile. For more information see [the docs](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html#Credentials_from_the_Shared_Credentials_File_____aws_credentials_).
 
-lambdaws.start();
-```
+2. You can use a [different profile](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html#Using_Profiles_with_the_SDK):
+
+   ```js
+   var lambdaws = require('lambdaws');
+
+   lambdaws.config({
+       credentials: 'my-profile',  // string, profile name.
+       role: ''  // string, AWS ARN. Must have full access to SQS.
+   });
+
+   lambdaws.start();
+   ```
+
+3. You can set the access and secret keys manually:
+
+   ```js
+   var lambdaws = require('lambdaws');
+
+   lambdaws.config({
+       credentials: {
+           accessKey: '',  // string, AWS AccessKeyId.
+           secretKey: '',  // string, AWS AccessKeySecret.
+       },
+       role: ''  // string, AWS ARN. Must have full access to SQS.
+   });
+
+   lambdaws.start();
+   ```
 
 Your AWS user credentials must have access to Lambda, SQS and S3.
 
