@@ -4,7 +4,7 @@
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/mentum/lambdaws?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://img.shields.io/travis/mentum/lambdaws.svg?style=flat)](https://travis-ci.org/mentum/lambdaws)
 [![Npm Version](http://img.shields.io/npm/v/lambda-job.svg?style=flat)](http://browsenpm.org/package/lambdaws)
 
-Using Amazon's Lambda Service, Lambdaws cloudifies any javascript function — including existing libraries — with no extra code. It removes the friction you get when using AWS Lambda directly. The goal of Lambdaws is to make it trivial to build highly scalable with high availability applications.
+Using Amazon's Lambda Service, Lambdaws cloudifies any JavaScript function — including existing libraries — with no extra code. It removes the friction you get when using AWS Lambda directly. The goal of Lambdaws is to make it trivial to build highly scalable, highly available applications.
 
 ## Features
 
@@ -12,7 +12,7 @@ Lambdaws will automatically:
 - Create a new SQS Queue for your function
 - Instrument your function/module to store the result on that SQS Queue
 - Zip your function/module
-- Include any depenencies needed from your module in the zip file
+- Include any dependencies needed from your module in the zip file
 - Upload the zip file to AWS Lambda
 - Instantly provide your application with the execution result as soon as it is available (by using SQS long-polling)
 - Detect any change to your library and re-upload it if needed
@@ -95,7 +95,7 @@ See ```example/example.js```
 
 ## Limitations
 
-The same [constraints](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) imposed by AWS Lambda apply. Your function should also be stateless and independant of the underlying architecture. Be also aware that any variable that your function uses must be declared by your function. Global and outer scope variables are not uploaded to AWS Lambda.
+The same [constraints](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) imposed by AWS Lambda apply. Your function should also be stateless and independent of the underlying architecture. Be also aware that any variable that your function uses must be declared by your function. Global and outer-scope variables are not uploaded to AWS Lambda.
 
 ## Roadmap
 
@@ -103,5 +103,5 @@ The same [constraints](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) 
 
 ## Contributions
 
-Contributions are welcomed! Please visit the Trello Board to vote and see which cards are the most in demand.
-When you decide to tackle a card, please move it to the according list, assign it to yourself, then make a pull request.
+Contributions are welcomed! Please visit the Trello Board to vote and see which cards are the most in-demand.
+When you decide to tackle a card, please move it to the according list, assign it to yourself, and make a pull request.
