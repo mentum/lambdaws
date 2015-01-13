@@ -7,15 +7,32 @@ html, body {
     font-family: Bariol;
 }
 
+a {
+    color: #1f96ec;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+
+a:hover, a:focus {
+    color: #117ac5;
+    text-decoration: none;
+}
+
 #header-wrapper {
-    margin-top: 35px;
-    margin-bottom: 35px;
+    padding: 50px 0;
     text-align: center;
 }
 
 #header-wrapper h1 {
     letter-spacing: 4px;
     font-size: 62px;
+}
+
+#header-wrapper h2 {
+    margin-top: 0;
+    margin-bottom: 50px;
 }
 
 #header-wrapper img {
@@ -29,20 +46,47 @@ html, body {
     }
 }
 
-h2, h3 {
-    margin-bottom: 30px;
-}
-
 #header-wrapper pre {
     white-space: normal;
     text-align: left;
     background-color: black;
     color: white;
     padding: 15px;
-    margin-bottom: 35px;
+    margin-bottom: 50px;
+}
+
+#header-wrapper .btn-lambdaws {
+    color: #fff;
+    background-color: #1f96ec;
+    border: none;
+    letter-spacing: 2px;
+    font-size: 21px;
+    padding: 10px 20px;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+
+#header-wrapper .btn-lambdaws:hover {
+    background-color: #117ac5;
+}
+
+#content-wrapper {
+    background-color: #1f96ec;
+    color: white;
+    padding: 50px 0;
+    letter-spacing: 1px;
+}
+
+#content-wrapper #section-title {
+    padding-bottom: 35px;
 }
 
 #content-wrapper p {
-    margin: 0 0 40px;
     font-size: 16px;
+}
+
+#content-wrapper .col-sm-6 {
+    margin: 0 0 40px;
 }
