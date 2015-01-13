@@ -3,8 +3,10 @@ var lambdaws = require('../'),
 	λ = lambdaws.create;
 
 lambdaws.config({
-	accessKey: 'YOUR_ACCESS_KEY',
-	secretKey: 'YOUR_SECRET',
+	credentials: {
+		accessKey: 'YOUR_ACCESS_KEY',
+		secretKey: 'YOUR_SECRET',
+	},
 	role: 'LAMBDAWS_ARN_WITH_FULL_ACCESS_TO_SQS', // not necessary if the user has full access
 	region: 'us-east-1'
 });
