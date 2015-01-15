@@ -7,7 +7,7 @@
 Using Amazon's Lambda Service, Lambdaws cloudifies any JavaScript function — including existing libraries — with no extra code. It removes the friction you get when using AWS Lambda directly. The goal of Lambdaws is to make it trivial to build highly scalable, highly available applications.
 
 ## AWS Lambda
-
+Update: 01/15/2015
 [AWS Lambda Preview is now open to all customers](https://forums.aws.amazon.com/ann.jspa?annID=2834). This means everybody can give Lambdaws a try!
 
 ## Features
