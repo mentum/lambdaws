@@ -10,7 +10,7 @@ Using Amazon's Lambda Service, Lambdaws cloudifies any JavaScript function — i
 
 Update: 01/15/2015
 
-[AWS Lambda Preview is now open to all customers](https://forums.aws.amazon.com/ann.jspa?annID=2834). This means everybody can give Lambdaws a try!
+[AWS Lambda Preview is now open to all customers](http://aws.amazon.com/about-aws/whats-new/2015/01/14/aws-lambda-preview-now-open-to-all-aws-customers/). This means everybody can give Lambdaws a try!
 
 ## Features
 
