@@ -22,18 +22,18 @@ describe("Function arguments", function() {
 
 		lambdaws.create(dumbAsyncFunction, ['dep'], { test: 'ok' });
 
-		expect(mockedLambdaHelper.getCloudedFunctionFromFunction).toHaveBeenCalledWith(dumbAsyncFunction, ['dep'], { test: 'ok' });
+		expect(mockedLambdaHelper.getCloudedFunctionFromFunction).toHaveBeenCalledWith(dumbAsyncFunction, ['dep', 'aws-sdk'], { test: 'ok' });
 	});
 
 	it('Can take a module path and a function name and deps and parameters overwrite', function() {
 		lambdaws.create('path/to/module', 'handler', ['rewire'], {test: 'ok'});
 		
-		expect(mockedLambdaHelper.getCloudedFunctionFromModule).toHaveBeenCalledWith('path/to/module', 'handler', ['rewire'], {test: 'ok'});
+		expect(mockedLambdaHelper.getCloudedFunctionFromModule).toHaveBeenCalledWith('path/to/module', 'handler', ['rewire', 'aws-sdk'], {test: 'ok'});
 	});
 
 	it('Can take only a module path and deps and parameters overwrite', function() {
 		lambdaws.create('path/to/module', ['rewire'], {test: 'ok'});
 		
-		expect(mockedLambdaHelper.getCloudedFunctionFromModule).toHaveBeenCalledWith('path/to/module', null, ['rewire'], {test: 'ok'});
+		expect(mockedLambdaHelper.getCloudedFunctionFromModule).toHaveBeenCalledWith('path/to/module', null, ['rewire', 'aws-sdk'], {test: 'ok'});
 	});
 });
