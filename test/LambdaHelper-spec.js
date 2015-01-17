@@ -6,11 +6,13 @@ var dumbAsyncFunction = function(callback) {callback()};
 
 describe("getCloudedFunctionFromModule", function() {
 	var mockedAWS 		= createSpyObj('mockedAWS', ['Lambda']),
-		mockedZipper 	= createSpyObj('zipper', ['zipFunction', 'zipModule']);
+		mockedZipper 	= createSpyObj('zipper', ['zipFunction', 'zipModule']),
+		mockedUpload 	= createSpy('uploadMock'),
+		mockedUploader  = function() { return mockedUpload; };
 	
 	var helper,
 		newLoadModule, 
-		newUploadZipAsync;
+		uploadHelper;
 
 	beforeEach(function() {
 		newLoadModule = function(module) {
@@ -23,15 +25,9 @@ describe("getCloudedFunctionFromModule", function() {
 			return function(){};
 		};
 
-		newUploadZipAsync = function() {
-			var d = Q.defer();
-			return d.promise;
-		};
-
 		LambdaHelper.__set__('zipper', mockedZipper);
 		LambdaHelper.__set__('_loadModule', newLoadModule);
-		LambdaHelper.__set__('_uploadZipAsync', newUploadZipAsync);
-		
+		LambdaHelper.__set__('uploadHelper', mockedUploader);
 
 		helper = new LambdaHelper(mockedAWS);
 	});
@@ -108,9 +104,10 @@ describe("Lambdaization", function() {
 		originalLoadModule,
 		originalLambdaize,
 		mockedLoadModule,
+		originalUploader,
 		mockedLambdaize,
+		mockedUploader,
 		originalZipper,
-		originalUpload,
 		mockedUpload,
 		mockedZipper,
 		lambdaHelper,
@@ -120,6 +117,7 @@ describe("Lambdaization", function() {
 		mockedLambdaizeModule 	= createSpy('mockedLambdaizeModule');
 		mockedLoadModule 		= createSpy('mockedLoadModule');
 		mockedLambdaize 		= createSpy('mockedLambdaize');
+		mockedUploader			= function() { return mockedUpload; };
 		mockedUpload 			= createSpy('mockedUpload');
 		mockedZipper 			= createSpyObj('mockedZipper', ['zipFunction', 'zipModule']);
 		mockedAWS 				= createSpyObj('mockedAWS', ['Lambda']);
@@ -127,12 +125,12 @@ describe("Lambdaization", function() {
 		originalLambdaizeModule	= LambdaHelper.__get__('_lambdaizeModule');
 		originalLoadModule		= LambdaHelper.__get__('_loadModule');
 		originalLambdaize 		= LambdaHelper.__get__('_lambdaize');
-		originalUpload 			= LambdaHelper.__get__('_uploadZipAsync');
+		originalUploader 		= LambdaHelper.__get__('uploadHelper');
 		originalZipper			= LambdaHelper.__get__('zipper');
 
 		LambdaHelper.__set__('_lambdaizeModule', mockedLambdaizeModule);
 		LambdaHelper.__set__('_loadModule', mockedLoadModule);
-		LambdaHelper.__set__('_uploadZipAsync', mockedUpload);
+		LambdaHelper.__set__('uploadHelper', mockedUploader);
 		LambdaHelper.__set__('_lambdaize', mockedLambdaize);
 		LambdaHelper.__set__('zipper', mockedZipper);
 		
@@ -142,7 +140,7 @@ describe("Lambdaization", function() {
 	afterEach(function() {
 		LambdaHelper.__set__('_lambdaizeModule', originalLambdaizeModule);
 		LambdaHelper.__set__('_loadModule', originalLoadModule);
-		LambdaHelper.__set__('_uploadZipAsync', originalUpload);
+		LambdaHelper.__set__('uploadHelper', originalUploader);
 		LambdaHelper.__set__('_lambdaize', originalLambdaize);
 		LambdaHelper.__set__('zipper', originalZipper);
 	})

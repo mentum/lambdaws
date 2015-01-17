@@ -2,17 +2,31 @@
 ====================================
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/mentum/lambdaws?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://img.shields.io/travis/mentum/lambdaws.svg?style=flat)](https://travis-ci.org/mentum/lambdaws)
+[![Npm Version](http://img.shields.io/npm/v/lambda-job.svg?style=flat)](http://browsenpm.org/package/lambdaws)
 
-Lambdaws makes it trivial to build highly scalable with high availability applications. Built on top of AWS Lambda. The goal of Lambdaws is to remove friction when using Lambda and make it easy to cloudify any function.
+Using Amazon's Lambda Service, Lambdaws cloudifies any JavaScript function — including existing libraries — with no extra code. It removes the friction you get when using AWS Lambda directly. The goal of Lambdaws is to make it trivial to build highly scalable, highly available applications.
+
+## AWS Lambda
+
+Update: 01/15/2015
+
+[AWS Lambda Preview is now open to all customers](http://aws.amazon.com/about-aws/whats-new/2015/01/14/aws-lambda-preview-now-open-to-all-aws-customers/). This means everybody can give Lambdaws a try!
 
 ## Features
 
-- Automatic function zipping and uploading to AWS Lambda
-- Supports external dependencies
-- Real-time function results using SQS long polling
-- Automatic instrumentation of your module prior uploading to Lambda
-- Doesn't require any code change to your library / module
-- Change detection in your code and automatic re-upload at first run
+Lambdaws will automatically:
+- Create a new SQS Queue for your function
+- Instrument your function/module to store the result on that SQS Queue
+- Zip your function/module
+- Include any dependencies needed from your module in the zip file
+- Upload the zip file to AWS Lambda
+- Instantly provide your application with the execution result as soon as it is available (by using SQS long-polling)
+- Detect any change to your library and re-upload it if needed
+
+Lambdaws will __not__:
+- Alter your function or module
+- Re-upload the function on every call
+- Add much overhead
 
 ## Installation
 
@@ -67,17 +81,38 @@ var cloudedCalculator = λ(
 
 ### Setting your AWS credentials
 
-```js
-var lambdaws = require('lambdaws');
+You can set your AWS credentials in one of three ways.
 
-lambdaws.config({
-	accessKey: '', // string, AWS AccessKeyId
-	secretKey: '', // string, AWS AccessKeySecret
-	role: '' // string, AWS ARN. Must have full access to SQS
-});
+1. By default, the AWS SDK looks for credentials in `~/.aws/credentials`. If you do not set anything, lambdaws will use the default profile. For more information see [the docs](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html#Credentials_from_the_Shared_Credentials_File_____aws_credentials_).
 
-lambdaws.start();
-```
+2. You can use a [different profile](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html#Using_Profiles_with_the_SDK):
+
+   ```js
+   var lambdaws = require('lambdaws');
+
+   lambdaws.config({
+       credentials: 'my-profile',  // string, profile name.
+       role: ''  // string, AWS ARN. Must have full access to SQS.
+   });
+
+   lambdaws.start();
+   ```
+
+3. You can set the access and secret keys manually:
+
+   ```js
+   var lambdaws = require('lambdaws');
+
+   lambdaws.config({
+       credentials: {
+           accessKey: '',  // string, AWS AccessKeyId.
+           secretKey: '',  // string, AWS AccessKeySecret.
+       },
+       role: ''  // string, AWS ARN. Must have full access to SQS.
+   });
+
+   lambdaws.start();
+   ```
 
 Your AWS user credentials must have access to Lambda, SQS and S3.
 
@@ -87,4 +122,12 @@ See ```example/example.js```
 
 ## Limitations
 
-The same [constraints](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) imposed by AWS Lambda apply. Your function should also be stateless and independant of the underlying architecture. Be also aware that any variable that your function uses must be declared by your function. Global and outer scope variables are not uploaded to AWS Lambda.
+The same [constraints](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) imposed by AWS Lambda apply. Your function should also be stateless and independent of the underlying architecture. Be also aware that any variable that your function uses must be declared by your function. Global and outer-scope variables are not uploaded to AWS Lambda.
+
+## Roadmap
+
+[Public Trello Board](https://trello.com/b/V8OrXkFa/lambda)
+
+## Contributions
+This repo is in early stage so don't be shy and report bugs if you find some.
+Contributions are more than welcomed! Please visit the Trello Board to vote and see which cards are the most in-demand. When you decide to tackle a card, please move it to the according list, assign it to yourself, and make a pull request.
