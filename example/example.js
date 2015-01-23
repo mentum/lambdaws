@@ -7,7 +7,7 @@ lambdaws.config({
 		accessKey: 'YOUR_ACCESS_KEY',
 		secretKey: 'YOUR_SECRET',
 	},
-	role: 'LAMBDAWS_ARN_WITH_FULL_ACCESS_TO_SQS', // not necessary if the user has full access
+	role: 'LAMBDAWS_ARN_WITH_FULL_ACCESS_TO_SQS_AND_S3',
 	region: 'us-east-1'
 });
 
