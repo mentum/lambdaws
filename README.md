@@ -91,7 +91,7 @@ You can set your AWS credentials in one of three ways.
 
    lambdaws.config({
        credentials: 'my-profile',  // string, profile name.
-       role: ''  // string, AWS ARN. Must have full access to SQS.
+       role: '' // ** Required **
    });
 
    lambdaws.start();
@@ -107,13 +107,13 @@ You can set your AWS credentials in one of three ways.
            accessKey: '',  // string, AWS AccessKeyId.
            secretKey: '',  // string, AWS AccessKeySecret.
        },
-       role: ''  // string, AWS ARN. Must have full access to SQS.
+       role: '' // ** Required **
    });
 
    lambdaws.start();
    ```
 
-Your AWS user credentials must have access to Lambda, SQS and S3.
+The `role` is a ARN of the IAM role that AWS Lambda can assume to push to SQS, S3 and any other AWS services you are using inside your Lambda function. You need to give the role those policies.
 
 ### Full working example
 
