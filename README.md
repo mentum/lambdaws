@@ -39,6 +39,8 @@ Lambdaws will __not__:
 
 This is not the recommended way of working with Lambdaws and should only be used for testing purposes. Modules should be used whenever possible.
 
+Please note that `λ` is used here only for shortening the code and for clarity.
+
 ```js
 var λ = require('lambdaws').create;
 
@@ -74,9 +76,10 @@ var cloudedCalculator = λ(
 
 ```js
 λ(yourFunc, {
-	memory: 256, // mb
-	description: 'Description of your function',
-	timeout: 10 // seconds
+	name: '', // (string) defaults to 'default'
+	memory: '256', // (string) defaults to '128'
+	description: 'Description of your function', // (string) defaults to ''
+	timeout: 10 // (int, seconds) defaults to 3 seconds
 });
 ```
 
