@@ -35,16 +35,19 @@ var stdin = process.openStdin();
 
 stdin.on('data', function(chunk) {
 	
-	cloudedMinus(2, 8, function(data) {
-		console.log("Inline (2-8) = ", data)
+	cloudedMinus(2, 8, function(err, data) {
+		if(err)	console.log('Error:  ', err);
+		else 	console.log('Inline: ', data);
 	});
 
-	cloudedAdd(2, 8, function(data) {
-		console.log("Module (2+8) = ", data)
+	cloudedAdd(2, 8, function(err, data) {
+		if(err)	console.log('Error:  ', err);
+		else 	console.log('Add  : ', data);
 	});
 
-	cloudedDivide(12, 2, function(data) {
-		console.log("Module (12/2) = ", data)
+	cloudedDivide(12, 2, function(err, data) {
+		if(err)	console.log('Error :  ', err);
+		else 	console.log('Divide: ', data);
 	});
 
 });
