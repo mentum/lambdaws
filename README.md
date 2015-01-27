@@ -33,9 +33,11 @@ Lambdaws will __not__:
 
 ## Usage
 
-### Inline functions without dependencies
+### Inline functions
 
 ```λ``` takes an inline asynchronous function and deploy it to AWS Lambda. If you call cloudedCalculator it will run in the cloud.
+
+This is not the recommended way of working with Lambdaws and should only be used for testing purposes. Modules should be used whenever possible.
 
 ```js
 var λ = require('lambdaws').create;
@@ -50,7 +52,7 @@ var cloudedCalculator = λ(calculator);
 
 // cloudedCalculator is a reference to the function in the cloud.
 // Therefore calling this function will invoke it on AWS Lambda rather than locally.
-cloudedCalculator(5, 2, function(data) {
+cloudedCalculator(5, 2, function(err, data) {
 	// Automatic instrumentation of the code added a SQS message push of the result
 	// the result of the function is then available in real time without polling CloudWatch
 	console.log(data); // Prints 7
