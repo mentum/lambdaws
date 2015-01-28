@@ -1,6 +1,6 @@
 {
   "name": "lambdaws",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "AWS lambda functions made easy",
   "main": "index.js",
   "scripts": {
