@@ -6,9 +6,13 @@ var dumbAsyncFunction = function(callback) {callback()};
 
 describe("getCloudedFunctionFromModule", function() {
 	var mockedAWS 		= createSpyObj('mockedAWS', ['Lambda']),
+		mockedSQS 		= createSpyObj('sqsHelper', ['startQueue']),
 		mockedZipper 	= createSpyObj('zipper', ['zipFunction', 'zipModule']),
-		mockedUpload 	= createSpy('uploadMock'),
-		mockedUploader  = function() { return mockedUpload; };
+		mockedUpload 	= createSpy('uploadMock');
+
+	var mockedUploader  = function() { return mockedUpload; },
+		mockedSQSHelper = function() {return mockedSQS};
+
 	
 	var helper,
 		newLoadModule, 
@@ -26,6 +30,7 @@ describe("getCloudedFunctionFromModule", function() {
 		};
 
 		LambdaHelper.__set__('zipper', mockedZipper);
+		LambdaHelper.__set__('SQSHelper', mockedSQSHelper);
 		LambdaHelper.__set__('_loadModule', newLoadModule);
 		LambdaHelper.__set__('uploadHelper', mockedUploader);
 
@@ -103,6 +108,7 @@ describe("Lambdaization", function() {
 		mockedLambdaizeModule,
 		originalLoadModule,
 		originalLambdaize,
+		originalSQSHelper,
 		mockedLoadModule,
 		originalUploader,
 		mockedLambdaize,
@@ -111,20 +117,25 @@ describe("Lambdaization", function() {
 		mockedUpload,
 		mockedZipper,
 		lambdaHelper,
-		mockedAWS;
+		mockedAWS,
+		mockedSQS;
 
 	beforeEach(function() {
 		mockedLambdaizeModule 	= createSpy('mockedLambdaizeModule');
 		mockedLoadModule 		= createSpy('mockedLoadModule');
 		mockedLambdaize 		= createSpy('mockedLambdaize');
-		mockedUploader			= function() { return mockedUpload; };
 		mockedUpload 			= createSpy('mockedUpload');
 		mockedZipper 			= createSpyObj('mockedZipper', ['zipFunction', 'zipModule']);
 		mockedAWS 				= createSpyObj('mockedAWS', ['Lambda']);
+		mockedSQS 				= createSpyObj('sqsHelper', ['startQueue']);
+
+		mockedSQSHelper 		= function() { return mockedSQS; };
+		mockedUploader			= function() { return mockedUpload; };
 
 		originalLambdaizeModule	= LambdaHelper.__get__('_lambdaizeModule');
 		originalLoadModule		= LambdaHelper.__get__('_loadModule');
 		originalLambdaize 		= LambdaHelper.__get__('_lambdaize');
+		originalSQSHelper		= LambdaHelper.__get__('SQSHelper');
 		originalUploader 		= LambdaHelper.__get__('uploadHelper');
 		originalZipper			= LambdaHelper.__get__('zipper');
 
@@ -132,6 +143,7 @@ describe("Lambdaization", function() {
 		LambdaHelper.__set__('_loadModule', mockedLoadModule);
 		LambdaHelper.__set__('uploadHelper', mockedUploader);
 		LambdaHelper.__set__('_lambdaize', mockedLambdaize);
+		LambdaHelper.__set__('SQSHelper', mockedSQSHelper);
 		LambdaHelper.__set__('zipper', mockedZipper);
 		
 		lambdaHelper = new LambdaHelper(mockedAWS);
@@ -142,6 +154,7 @@ describe("Lambdaization", function() {
 		LambdaHelper.__set__('_loadModule', originalLoadModule);
 		LambdaHelper.__set__('uploadHelper', originalUploader);
 		LambdaHelper.__set__('_lambdaize', originalLambdaize);
+		LambdaHelper.__set__('SQSHelper', originalSQSHelper);
 		LambdaHelper.__set__('zipper', originalZipper);
 	})
 
@@ -181,7 +194,7 @@ describe("Lambdaization", function() {
 			expect(mockedUpload).toHaveBeenCalled();
 		});
 		
-		it('should Lambdaize module when called the first time', function(){
+		it('should Lambdaize module only once', function(){
 			lambdaHelper.getCloudedFunctionFromModule('/module/path', handlerName, ['dep'], {});
 			lambdaHelper.getCloudedFunctionFromModule('/module/path', handlerName, ['dep'], {});
 			

@@ -29,10 +29,7 @@ var cloudedMinus = λ(minus, ['fs', 'q'], {
 var cloudedAdd = λ('./calculator', 'add', ['fs', 'q'], { name: 'ADD' });
 var cloudedDivide = λ('./calculator', 'divide', ['fs', 'q'], { name: 'DIVIDE' });
 
-lambdaws.start();
-
 var stdin = process.openStdin();
-
 stdin.on('data', function(chunk) {
 	
 	cloudedMinus(2, 8, function(err, data) {
