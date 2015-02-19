@@ -10,11 +10,7 @@
     "type": "git",
     "url": "https://github.com/mentum/lambdaws.git"
   },
-  "keywords": [
-    "AWS",
-    "lambda",
-    "dynamic"
-  ],
+  "keywords": ["lambda", "aws", "amazon", "amazon-lambda", "aws-lambda", "lambda-node", "deploy", "deployment","run","run-sync","easy-deploy","node-lambda","aws-node-lambda","node-lambdaws" ],
   "author": "",
   "license": "LGPL.v3",
   "bugs": {
