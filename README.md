@@ -87,7 +87,8 @@ var cloudedBrowser = λ(
 	name: '', // (string) defaults to 'default'
 	memory: '256', // (string) defaults to '128'
 	description: 'Description of your function', // (string) defaults to ''
-	timeout: 10 // (int, seconds) defaults to 3 seconds
+	timeout: 10, // (int, seconds) defaults to 3 seconds,
+	ignoreResponse: true // Will not send results back to SQS, function will run ~ 150ms faster
 });
 ```
 
@@ -131,6 +132,10 @@ The `role` is a ARN of the IAM role that AWS Lambda can assume to push to SQS, S
 ### Full working example
 
 See ```example/example.js```
+
+### Upload functions using the Command Line Interface (CLI)
+
+Documentation needed. See ```bin/lambdaws-cli.js``` for implementation and usage.
 
 ## Limitations
 
