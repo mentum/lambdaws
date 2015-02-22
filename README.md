@@ -5,12 +5,6 @@
 
 Using Amazon's Lambda Service, Lambdaws cloudifies any JavaScript function — including existing libraries — with no extra code. It removes the friction you get when using AWS Lambda directly. The goal of Lambdaws is to make it trivial to build highly scalable, highly available applications.
 
-## AWS Lambda
-
-Update: 01/15/2015
-
-[AWS Lambda Preview is now open to all customers](http://aws.amazon.com/about-aws/whats-new/2015/01/14/aws-lambda-preview-now-open-to-all-aws-customers/). This means everybody can give Lambdaws a try!
-
 ## Features
 
 Lambdaws will automatically:
@@ -21,6 +15,7 @@ Lambdaws will automatically:
 - Upload the zip file to AWS Lambda
 - Instantly provide your application with the execution result as soon as it is available (by using SQS long-polling)
 - Detect any change to your library and re-upload it if needed
+- Install large required system libraries like phantomjs
 
 Lambdaws will __not__:
 - Alter your function or module
@@ -69,6 +64,19 @@ var cloudedCalculator = λ(
 	'functionNameInsideModule', // The name of the function in the module. Optional if module returns a function.
 	['async', 'request'], // External dependencies. Must reside in node_modules for now.
 	{ description : 'my custom description' } // Settings override
+);
+```
+
+### Using large external libraries
+
+You can tell Lambdaws to download and install system libraries. An example of library is phantomjs. The available libraries can be found on [this repository](https://github.com/mentum/lambdaws-libs). Feel free to make pull requests to add new libraries. The reason for this feature is that lambda has max upload size of 30Mb.
+
+```js
+var cloudedBrowser = λ(
+	'./my_module_depending_on_phantomjs', // Relative path to module
+	'functionNameInsideModule', // The name of the function in the module. Optional if module returns a function.
+	['Q', ':phantomjs'], // External libraries are prepended with ":"
+	{ name : 'PhantomJSExample' } // Settings override
 );
 ```
 
