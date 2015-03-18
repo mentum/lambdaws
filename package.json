@@ -1,10 +1,10 @@
 {
   "name": "lambdaws",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "AWS lambda functions made easy",
   "main": "index.js",
   "bin": {
-      "lambdaws": "./bin/lambdaws-cli"
+      "lambdaws": "./bin/lambdaws-cli.jsy"
     },
   "scripts": {
     "test": "./node_modules/.bin/jasmine-node test"
