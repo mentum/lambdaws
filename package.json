@@ -38,6 +38,7 @@
   "dependencies": {
     "MD5": "^1.2.1",
     "aws-sdk": "^2.0.30",
+    "cloudwatch-logs-hose": "0.0.2",
     "commander": "^2.6.0",
     "dotenv": "^0.5.1",
     "extend": "^2.0.0",

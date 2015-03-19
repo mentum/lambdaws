@@ -16,6 +16,7 @@ Lambdaws will automatically:
 - Instantly provide your application with the execution result as soon as it is available (by using SQS long-polling)
 - Detect any change to your library and re-upload it if needed
 - [Install large required system libraries like phantomjs](https://github.com/mentum/lambdaws/blob/master/README.md#using-large-external-libraries)
+- Detect execution timeouts and throw an appropriate error when it occurs
 
 Lambdaws will __not__:
 - Alter your function or module
