@@ -128,7 +128,9 @@ You can set your AWS credentials in one of three ways.
    lambdaws.start();
    ```
 
-The `role` is a ARN of the IAM role that AWS Lambda can assume to push to SQS, S3 and any other AWS services you are using inside your Lambda function. You need to give the role those policies.
+The lambda function will run in the `role` specified. It must be an ARN of the IAM role that has s3:GetObject, sqs:SendMessage, and lambda:InvokeFunction allowed. The AWSLambdaExecute managed policy can be used in place of lambda:InvokeFunction.  Your lambda functions may require additional permissions on the `role` if they use other AWS services.
+
+The `credentials` must be for a user that can has allowed policies for sqs:CreateQueue, sqs:DeleteMessage and lambda:* actions.
 
 ### Full working example
 
