@@ -41,7 +41,7 @@ Please note that `λ` is used here only for shortening the code and for clarity.
 var λ = require('lambdaws').create;
 
 // A simple inlined asynchronous function computing A + B
-var calculator = function(a, b, callback) { 
+var calculator = function(a, b, callback) {
 	callback(a + b);
 };
 
@@ -128,7 +128,7 @@ You can set your AWS credentials in one of three ways.
    lambdaws.start();
    ```
 
-The lambda function will run in the `role` specified. It must be an ARN of the IAM role that has `s3:GetObject`, `sqs:SendMessage`, and `lambda:InvokeFunction` allowed. The `AWSLambdaExecute` managed policy can be used in place of `lambda:InvokeFunction`.  Your lambda functions may require additional permissions on the `role` if they use other AWS services.
+The lambda function will run in the `role` specified. It must be an ARN of the IAM role that has `s3:GetObject`, `sqs:SendMessage`, `lambda:InvokeFunction`, and `logs:*` allowed. The `AWSLambdaExecute` managed policy can be used in place of `lambda:InvokeFunction`.  Your lambda functions may require additional permissions on the `role` if they use other AWS services.
 
 The `credentials` must be for a user that can has allowed policies for `sqs:CreateQueue`, `sqs:DeleteMessage` and `lambda:*` actions.
 
