@@ -1,3 +1,5 @@
+### Important note : this library is good with the first aws lambda API. Most of the features are now built-in Lambda. We strongly recommend you to use the [AWS Lambda CLi](http://docs.aws.amazon.com/cli/latest/reference/lambda/index.html) to deploy your functions and interact with Lambda. Thanks for the suppport.
+
 ![logo](./logo50x50.png) Lambdaws
 ====================================
 
