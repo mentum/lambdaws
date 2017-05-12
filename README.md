@@ -146,10 +146,6 @@ Documentation needed. See ```bin/lambdaws-cli.js``` for implementation and usage
 
 The same [constraints](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) imposed by AWS Lambda apply. Your function should also be stateless and independent of the underlying architecture. Be also aware that any variable that your function uses must be declared by your function. Global and outer-scope variables are not uploaded to AWS Lambda.
 
-## Roadmap
-
-[Public Trello Board](https://trello.com/b/V8OrXkFa/lambda)
-
 ## Contributions
 This repo is in early stage so don't be shy and report bugs if you find some.
 Contributions are more than welcomed! Please visit the Trello Board to vote and see which cards are the most in-demand. When you decide to tackle a card, please move it to the according list, assign it to yourself, and make a pull request.
